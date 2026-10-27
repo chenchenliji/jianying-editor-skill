@@ -20,11 +20,28 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 env_root = os.getenv("JY_SKILL_ROOT", "").strip()
 skill_candidates = [
     env_root,
+    os.path.join(current_dir, ".cursor", "skills", "jianying-editor"),
+    os.path.join(current_dir, ".agents", "skills", "jianying-editor"),
     os.path.join(current_dir, ".agent", "skills", "jianying-editor"),
     os.path.join(current_dir, ".trae", "skills", "jianying-editor"),
     os.path.join(current_dir, ".claude", "skills", "jianying-editor"),
+    os.path.join(current_dir, ".codex", "skills", "jianying-editor"),
     os.path.join(current_dir, "skills", "jianying-editor"),
+    os.path.join(current_dir, "..", ".cursor", "skills", "jianying-editor"),
+    os.path.join(current_dir, "..", ".agents", "skills", "jianying-editor"),
+    os.path.join(current_dir, "..", ".agent", "skills", "jianying-editor"),
+    os.path.join(current_dir, "..", ".claude", "skills", "jianying-editor"),
+    os.path.abspath(".cursor/skills/jianying-editor"),
+    os.path.abspath(".agents/skills/jianying-editor"),
     os.path.abspath(".agent/skills/jianying-editor"),
+    os.path.abspath(".trae/skills/jianying-editor"),
+    os.path.abspath(".claude/skills/jianying-editor"),
+    os.path.abspath(".codex/skills/jianying-editor"),
+    os.path.abspath("skills/jianying-editor"),
+    os.path.expanduser("~/.cursor/skills/jianying-editor"),
+    os.path.expanduser("~/.agents/skills/jianying-editor"),
+    os.path.expanduser("~/.claude/skills/jianying-editor"),
+    os.path.expanduser("~/.codex/skills/jianying-editor"),
     os.path.dirname(current_dir),  # when script is under examples/
 ]
 
@@ -55,6 +72,7 @@ from jy_wrapper import JyProject
 
 - Do not use `from jy import JyProject` unless your project explicitly provides `jy.py`.
 - Prefer setting `JY_SKILL_ROOT` in mixed editor environments.
+- Cursor project install: `.cursor/skills/jianying-editor`. User install: `~/.cursor/skills/jianying-editor`.
 - Put business scripts in the user workspace, not inside the skill repo.
 - Always call `project.save()` at the end.
 

@@ -1,0 +1,21 @@
+{
+  "name": "jianying-editor",
+  "owner": {
+    "name": "chenchenliji"
+  },
+  "metadata": {
+    "description": "剪映专业版草稿自动化技能"
+  },
+  "plugins": [
+    {
+      "name": "jianying-editor",
+      "source": ".",
+      "description": "用自然语言生成剪映专业版草稿：素材导入、字幕、配音、特效、录屏变焦与导出。",
+      "version": "1.7.0",
+      "license": "MIT",
+      "keywords": ["jianying", "video", "draft", "subtitles", "tts"],
+      "logo": "assets/cover.png",
+      "category": "media"
+    }
+  ]
+}

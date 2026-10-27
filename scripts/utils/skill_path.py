@@ -1,26 +1,39 @@
 import os
 from typing import List, Optional, Tuple
 
+# Editor layouts that place this repo at <root>/jianying-editor.
+_EDITOR_REL_PATHS = (
+    os.path.join(".cursor", "skills", "jianying-editor"),
+    os.path.join(".agents", "skills", "jianying-editor"),
+    os.path.join(".agent", "skills", "jianying-editor"),
+    os.path.join(".trae", "skills", "jianying-editor"),
+    os.path.join(".claude", "skills", "jianying-editor"),
+    os.path.join(".codex", "skills", "jianying-editor"),
+    os.path.join("skills", "jianying-editor"),
+)
+
 
 def _build_candidates(start_dir: str) -> List[str]:
     """
-    Build candidate skill roots for different editors/layouts.
+    Build candidate skill roots for different editors and install layouts.
+
+    Local project installs are preferred over the user home directory.
     """
     cwd = os.getcwd()
-    parents = [start_dir, os.path.join(start_dir, ".."), os.path.join(start_dir, "..", "..")]
-    editor_paths = [
-        os.path.join(start_dir, ".agents", "skills", "jianying-editor"),
-        os.path.join(start_dir, ".agent", "skills", "jianying-editor"),
-        os.path.join(start_dir, ".trae", "skills", "jianying-editor"),
-        os.path.join(start_dir, ".claude", "skills", "jianying-editor"),
-        os.path.join(start_dir, "skills", "jianying-editor"),
-        os.path.join(cwd, ".agents", "skills", "jianying-editor"),
-        os.path.join(cwd, ".agent", "skills", "jianying-editor"),
-        os.path.join(cwd, ".trae", "skills", "jianying-editor"),
-        os.path.join(cwd, ".claude", "skills", "jianying-editor"),
-        os.path.join(cwd, "skills", "jianying-editor"),
+    home = os.path.expanduser("~")
+    local_bases = [
+        start_dir,
+        os.path.join(start_dir, ".."),
+        os.path.join(start_dir, "..", ".."),
+        os.path.join(start_dir, "..", "..", ".."),
     ]
-    return parents + editor_paths
+    candidates: List[str] = list(local_bases)
+    for base in local_bases + [cwd]:
+        for rel in _EDITOR_REL_PATHS:
+            candidates.append(os.path.join(base, rel))
+    for rel in _EDITOR_REL_PATHS:
+        candidates.append(os.path.join(home, rel))
+    return candidates
 
 
 def resolve_skill_root(start_dir: str) -> Tuple[Optional[str], List[str]]:

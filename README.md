@@ -74,9 +74,21 @@ git clone https://github.com/luoluoluo22/jianying-editor-skill.git .trae/skills/
 git clone https://github.com/luoluoluo22/jianying-editor-skill.git .claude/skills/jianying-editor
 ```
 
-**💻 Cursor / VSCode / 通用:**
+**💻 Cursor:**
 ```bash
-# 通用方式：安装到根目录 include 列表
+# 项目级：当前仓库的 Agent 会自动加载
+git clone https://github.com/chenchenliji/jianying-editor-skill.git .cursor/skills/jianying-editor
+
+# 用户级：本机所有项目可用。Cloud Agent 需在 Settings → Agents 打开 Sync Skills
+git clone https://github.com/chenchenliji/jianying-editor-skill.git ~/.cursor/skills/jianying-editor
+```
+
+也可以在 Cursor 里通过 Customize → Plugins → From GitHub Repository 导入本仓库。仓库已提供 `.cursor-plugin/marketplace.json`。导入后安装 `jianying-editor` 插件，技能会出现在 Skills 列表中。
+
+直接打开本仓库时，技能入口是 `.cursor/skills/jianying-editor/SKILL.md`，脚本、规则和素材仍在仓库根目录。
+
+**🧩 VSCode / 通用:**
+```bash
 git clone https://github.com/luoluoluo22/jianying-editor-skill.git skills/jianying-editor
 ```
 
@@ -163,7 +175,11 @@ Skill 默认会自动探测您的剪映安装位置，如果探测失败，请�
 当有新功能发布时，您可以输入以下命令一键更新：
 
 ```bash
-cd .agent/skills/jianying-editor
+# 按实际安装位置进入目录，例如：
+# .cursor/skills/jianying-editor
+# ~/.cursor/skills/jianying-editor
+# .agent/skills/jianying-editor
+cd .cursor/skills/jianying-editor
 git pull
 ```
 

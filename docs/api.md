@@ -11,6 +11,7 @@ import os
 import sys
 skill_root = os.getenv("JY_SKILL_ROOT", r"<SKILL_ROOT>")
 sys.path.insert(0, os.path.join(skill_root, "scripts"))
+# Cursor installs: .cursor/skills/jianying-editor or ~/.cursor/skills/jianying-editor
 from jy_wrapper import JyProject
 ```
 

@@ -7,6 +7,8 @@ description: 剪映 (JianYing) AI自动化剪辑的高级封装 API (JyWrapper)�
 
 Use this skill when the user wants to automate video editing, generate drafts, or manipulate media assets in JianYing Pro.
 
+Cursor 打开本仓库时，从 `.cursor/skills/jianying-editor/SKILL.md` 发现本技能。可执行代码仍以仓库根目录为 `SKILL_ROOT`。安装到其他项目时，把本仓库克隆到 `.cursor/skills/jianying-editor` 或 `~/.cursor/skills/jianying-editor`。
+
 Agent execution playbook: [docs/agent-playbook.md](docs/agent-playbook.md)
 Minimal command SOP: [docs/minimal-command-sop.md](docs/minimal-command-sop.md)
 Natural language usage guide: [usage.md](usage.md)
@@ -125,16 +127,26 @@ env_root = os.getenv("JY_SKILL_ROOT", "").strip()
 # 探测 Skill 路径 (支持 Antigravity, Trae, Claude 等)
 skill_root = next((p for p in [
     env_root,
+    os.path.join(current_dir, ".cursor", "skills", "jianying-editor"),
     os.path.join(current_dir, ".agents", "skills", "jianying-editor"),
     os.path.join(current_dir, ".agent", "skills", "jianying-editor"),
     os.path.join(current_dir, ".trae", "skills", "jianying-editor"),
     os.path.join(current_dir, ".claude", "skills", "jianying-editor"),
+    os.path.join(current_dir, ".codex", "skills", "jianying-editor"),
     os.path.join(current_dir, "skills", "jianying-editor"),
+    os.path.join(current_dir, "..", ".cursor", "skills", "jianying-editor"),
+    os.path.join(current_dir, "..", ".agents", "skills", "jianying-editor"),
+    os.path.abspath(".cursor/skills/jianying-editor"),
     os.path.abspath(".agents/skills/jianying-editor"),
     os.path.abspath(".agent/skills/jianying-editor"),
     os.path.abspath(".trae/skills/jianying-editor"),
     os.path.abspath(".claude/skills/jianying-editor"),
+    os.path.abspath(".codex/skills/jianying-editor"),
     os.path.abspath("skills/jianying-editor"),
+    os.path.expanduser("~/.cursor/skills/jianying-editor"),
+    os.path.expanduser("~/.agents/skills/jianying-editor"),
+    os.path.expanduser("~/.claude/skills/jianying-editor"),
+    os.path.expanduser("~/.codex/skills/jianying-editor"),
     os.path.dirname(current_dir)
 ] if p and os.path.exists(os.path.join(p, "scripts", "jy_wrapper.py"))), None)
 
