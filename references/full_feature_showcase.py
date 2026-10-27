@@ -21,9 +21,15 @@ import random
 current_dir = os.path.dirname(os.path.abspath(__file__))
 skill_candidates = [
     os.path.dirname(current_dir),  # 当前仓库结构: <skill_root>/references
+    os.path.join(current_dir, "..", ".cursor", "skills", "jianying-editor"),
+    os.path.join(current_dir, ".cursor", "skills", "jianying-editor"),
+    os.path.join(current_dir, ".agents", "skills", "jianying-editor"),
     os.path.join(current_dir, ".agent", "skills", "jianying-editor"),
     os.path.join(current_dir, "jianying-editor-skill", ".agent", "skills", "jianying-editor"),
+    os.path.abspath(".cursor/skills/jianying-editor"),
+    os.path.abspath(".agents/skills/jianying-editor"),
     os.path.abspath(".agent/skills/jianying-editor"),
+    os.path.expanduser("~/.cursor/skills/jianying-editor"),
 ]
 skill_root = next(
     (p for p in skill_candidates if os.path.exists(os.path.join(p, "scripts", "jy_wrapper.py"))),

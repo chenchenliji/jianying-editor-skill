@@ -1,5 +1,11 @@
 # Changelog
- 
+
+## Unreleased
+
+- Registered this repository as a Cursor Agent Skill at `.cursor/skills/jianying-editor`.
+- Added a Cursor plugin manifest (`.cursor-plugin/plugin.json`) and marketplace entry so the repo can be imported from GitHub.
+- Skill root lookup now includes `.cursor/skills/jianying-editor` and `~/.cursor/skills/jianying-editor`.
+
 ## v1.7.0 - 2026-09-11
 - **Draft Self-containment & Media Missing Fix** (Contributed by @shaozheliu, #23):
   - Fixed JianYing Pro 5.9+ "media missing" error caused by empty `local_material_id` and external transient file cleanup.

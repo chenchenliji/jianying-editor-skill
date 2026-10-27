@@ -2,24 +2,33 @@ import os
 import sys
 from typing import List, Optional, Tuple
 
+_EDITOR_REL_PATHS = (
+    os.path.join(".cursor", "skills", "jianying-editor"),
+    os.path.join(".agents", "skills", "jianying-editor"),
+    os.path.join(".agent", "skills", "jianying-editor"),
+    os.path.join(".trae", "skills", "jianying-editor"),
+    os.path.join(".claude", "skills", "jianying-editor"),
+    os.path.join(".codex", "skills", "jianying-editor"),
+    os.path.join("skills", "jianying-editor"),
+)
+
 
 def _build_candidates(start_dir: str) -> List[str]:
     cwd = os.getcwd()
-    return [
+    home = os.path.expanduser("~")
+    local_bases = [
         os.path.abspath(start_dir),
         os.path.abspath(os.path.join(start_dir, "..")),
         os.path.abspath(os.path.join(start_dir, "..", "..")),
-        os.path.abspath(os.path.join(start_dir, ".agents", "skills", "jianying-editor")),
-        os.path.abspath(os.path.join(start_dir, ".agent", "skills", "jianying-editor")),
-        os.path.abspath(os.path.join(start_dir, ".trae", "skills", "jianying-editor")),
-        os.path.abspath(os.path.join(start_dir, ".claude", "skills", "jianying-editor")),
-        os.path.abspath(os.path.join(start_dir, "skills", "jianying-editor")),
-        os.path.abspath(os.path.join(cwd, ".agents", "skills", "jianying-editor")),
-        os.path.abspath(os.path.join(cwd, ".agent", "skills", "jianying-editor")),
-        os.path.abspath(os.path.join(cwd, ".trae", "skills", "jianying-editor")),
-        os.path.abspath(os.path.join(cwd, ".claude", "skills", "jianying-editor")),
-        os.path.abspath(os.path.join(cwd, "skills", "jianying-editor")),
+        os.path.abspath(os.path.join(start_dir, "..", "..", "..")),
     ]
+    candidates = list(local_bases)
+    for base in local_bases + [os.path.abspath(cwd)]:
+        for rel in _EDITOR_REL_PATHS:
+            candidates.append(os.path.abspath(os.path.join(base, rel)))
+    for rel in _EDITOR_REL_PATHS:
+        candidates.append(os.path.abspath(os.path.join(home, rel)))
+    return candidates
 
 
 def resolve_skill_root(start_dir: str) -> Optional[str]:
